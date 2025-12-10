@@ -40,28 +40,3 @@
     flex-direction: column;
     gap: 8px;
 }
-
-
-.buttons {
-    display: flex;
-
-}
-
-.btn {
-    padding: 10px 15px;
-    margin: 10px;
-    border: none;
-    border-radius: 7px;
-    cursor: pointer;
-    border-style: groove;
-}
-
-.btn:hover {
-    background-color: #308add;
-    color: aliceblue;
-}
-
-.btn-delete:hover {
-    background-color: #c52f1b;
-    color: aliceblue;
-}

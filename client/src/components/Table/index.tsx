@@ -33,11 +33,6 @@ export default function EmployeesTable({ data }: TableProps) {
                                 {openId === employee.id && (
                                     <div className="row-open">
                                         <TableCard employeeData={employee}></TableCard>
-                                        <div className="buttons">
-                                            <button onClick={() => console.log('Update')} className="btn">Atualizar</button>
-                                            <button onClick={() => console.log('Delete')} className="btn btn-delete">Deletar</button>
-                                        </div>
-
                                     </div>
                                 )}
                             </td>
