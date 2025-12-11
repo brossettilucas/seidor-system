@@ -1,5 +1,6 @@
 import store from "../data/employeesData";
 import { Employee } from "../types";
+import * as salaryServices from "./salaryServices";
 
 export function getEmployees(): Employee[] {
     return Array.from(store.employees.values());
@@ -17,6 +18,8 @@ export function addEmployee(data: Omit<Employee, "id">): Employee {
         id,
         ...data,
     };
+
+    newEmployee.discountIRPF = salaryServices.calculateIRRFDiscount(newEmployee.baseSalary, newEmployee.discount, newEmployee.dependants);
 
     store.employees.set(id, newEmployee);
     return newEmployee;
@@ -36,8 +39,11 @@ export function updateEmployee(id: string, data: Employee): Employee | null {
     const updated: Employee = {
         ...existing,
         ...data,
-        id: numericId, 
+        id: numericId,
     };
+
+    updated.discountIRPF = salaryServices.calculateIRRFDiscount(updated.baseSalary, updated.discount, updated.dependants);
+
 
     store.employees.set(numericId, updated);
 
