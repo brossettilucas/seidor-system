@@ -1,0 +1,46 @@
+.delete-modal-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.delete-modal-title {
+  margin: 0;
+}
+
+.delete-modal-text {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.delete-modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.btn-cancel {
+  padding: 8px 16px;
+  background: transparent;
+  border: 1px solid #666;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #f2f2f2;
+}
+
+.btn-delete {
+  padding: 8px 16px;
+  background: #d32f2f;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background: #b71c1c;
+}

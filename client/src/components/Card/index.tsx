@@ -1,10 +1,16 @@
 import "./Card.css"
 import type { CardProps } from "../../types/props";
+import { useState } from "react";
+import AppModal from "../Modal/AppModal";
+import EmployeeForm from "../Form/EmployeeForm";
+import EmployeeDeleteModal from "../Modal/EmployeeDeleteModal";
 
 export default function TableCard({ employeeData }: CardProps) {
+  const [openUpdate, setOpenUpdate] = useState(false);
+  const [openDelete, setOpenDelete] = useState(false);
 
   return (
-    <div className="card-root"><div>
+    <div className="card-root">
       <div className="card-info">
         <div className="card-line">
           <span className="label">Nome: </span>
@@ -32,14 +38,14 @@ export default function TableCard({ employeeData }: CardProps) {
         </div>
       </div>
       <div className="card-buttons">
-        <button onClick={() => console.log('Update')} className="btn">Atualizar</button>
-        <button onClick={() => console.log('Delete')} className="btn btn-delete">Deletar</button>
-      </div>
-    </div></div>
+        <button onClick={() => setOpenUpdate(true)} className="btn">Atualizar</button>
+        <AppModal open={openUpdate} onClose={() => { setOpenUpdate(false) }}>
+          <EmployeeForm employee={employeeData} onSubmit={() => { console.log('submit') }} onCancel={() => { setOpenUpdate(false) }}></EmployeeForm>
+        </AppModal>
 
+        <button onClick={() => setOpenDelete(true)} className="btn btn-delete">Deletar</button>
+        <EmployeeDeleteModal open={openDelete} onClose={() => { setOpenDelete(false) }} onConfirm={() => { }} />
+      </div>
+    </div>
   );
 };
-
-
-
-

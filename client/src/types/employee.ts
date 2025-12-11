@@ -7,3 +7,11 @@ export interface Employee {
     dependants: number;
     discountIRPF?: number;
 }
+
+export interface EmployeeFormValues {
+  name: string;
+  cpf: string;
+  baseSalary: string;
+  discount: string;
+  dependants: string;
+}
