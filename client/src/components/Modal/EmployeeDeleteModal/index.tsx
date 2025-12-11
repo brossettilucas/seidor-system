@@ -10,7 +10,7 @@ export default function EmployeeDeleteModal({ open, onClose, onConfirm, employee
 
                 <p className="delete-modal-text">
                     Tem certeza que deseja excluir{" "}
-                    {employeeName ? <strong>{employeeName}</strong> : "este funcionário"}?
+                    <strong>{employeeName}</strong>?
                     <br />
                     Esta ação não pode ser desfeita.
                 </p>

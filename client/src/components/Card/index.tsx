@@ -44,7 +44,7 @@ export default function TableCard({ employeeData }: CardProps) {
         </AppModal>
 
         <button onClick={() => setOpenDelete(true)} className="btn btn-delete">Deletar</button>
-        <EmployeeDeleteModal open={openDelete} onClose={() => { setOpenDelete(false) }} onConfirm={() => { }} />
+        <EmployeeDeleteModal open={openDelete} onClose={() => { setOpenDelete(false) }} onConfirm={() => { }} employeeName={employeeData.name}/>
       </div>
     </div>
   );

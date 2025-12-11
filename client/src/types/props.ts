@@ -25,5 +25,5 @@ export interface EmployeeDeleteModalProps {
   open: boolean;
   onClose: () => void;
   onConfirm: () => void;
-  employeeName?: string;
+  employeeName: string;
 }
