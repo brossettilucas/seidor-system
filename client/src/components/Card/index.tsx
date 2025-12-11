@@ -4,6 +4,8 @@ import { useState } from "react";
 import AppModal from "../Modal/AppModal";
 import EmployeeForm from "../Form/EmployeeForm";
 import EmployeeDeleteModal from "../Modal/EmployeeDeleteModal";
+import { deleteEmployee, updateEmployee } from "../../api/employeeApi";
+import { normalizeEmployeeForm } from "../../utils/typeConvert";
 
 export default function TableCard({ employeeData }: CardProps) {
   const [openUpdate, setOpenUpdate] = useState(false);
@@ -40,11 +42,24 @@ export default function TableCard({ employeeData }: CardProps) {
       <div className="card-buttons">
         <button onClick={() => setOpenUpdate(true)} className="btn">Atualizar</button>
         <AppModal open={openUpdate} onClose={() => { setOpenUpdate(false) }}>
-          <EmployeeForm employee={employeeData} onSubmit={() => { console.log('submit') }} onCancel={() => { setOpenUpdate(false) }}></EmployeeForm>
+          <EmployeeForm
+            employee={employeeData}
+            onSubmit={async (updatedData) => {
+              await updateEmployee(employeeData.id, normalizeEmployeeForm(updatedData));
+              setOpenUpdate(false);
+            }}
+            onCancel={() => { setOpenUpdate(false) }}></EmployeeForm>
         </AppModal>
 
         <button onClick={() => setOpenDelete(true)} className="btn btn-delete">Deletar</button>
-        <EmployeeDeleteModal open={openDelete} onClose={() => { setOpenDelete(false) }} onConfirm={() => { }} employeeName={employeeData.name}/>
+        <EmployeeDeleteModal
+          open={openDelete}
+          onClose={() => { setOpenDelete(false) }}
+          onConfirm={async () => {
+            await deleteEmployee(employeeData.id);
+            setOpenDelete(false);
+          }}
+          employeeName={employeeData.name} />
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import './App.css';
 import EmployeesTable from '../Table';
 import type { Employee } from '../../types/employee';
 import AppModal from '../Modal/AppModal';
 import EmployeeForm from '../Form/EmployeeForm';
+import { createEmployee, getEmployees } from '../../api/employeeApi';
+import { normalizeEmployeeForm } from '../../utils/typeConvert';
 
 function App() {
   const [employees, setEmployees] = useState<Employee[]>([]);
@@ -12,14 +13,8 @@ function App() {
 
   useEffect(() => {
     (async () => {
-      const API_URL = "http://localhost:5000/api/";
-      try {
-        const response = await axios.get(API_URL + 'employees');
-        console.log(response.data);
-        setEmployees(response.data || []);
-      } catch (e) {
-        console.error(e);
-      }
+      const response = await getEmployees();
+      setEmployees(response || []);
     })();
   }, [])
 
@@ -32,7 +27,12 @@ function App() {
             <h1 className="app-header-title">Gerenciamento de Funcionários</h1>
             <button className="add-user-btn" onClick={() => { setOpenCreate(true) }}>Cadastrar</button>
             <AppModal open={openCreate} onClose={() => { setOpenCreate(false) }}>
-              <EmployeeForm onSubmit={() => { console.log('submit') }} onCancel={() => { setOpenCreate(false) }}></EmployeeForm>
+              <EmployeeForm
+                onSubmit={async (employeeData) => {
+                  await createEmployee(normalizeEmployeeForm(employeeData));
+                  setOpenCreate(false);
+                }}
+                onCancel={() => { setOpenCreate(false) }}></EmployeeForm>
             </AppModal>
           </header>
         </div>
